@@ -14,6 +14,7 @@ export function tempCacheLocalChatLogs(db: Database): QueryExecResult[] {
         'sender_platform_id' integer,
         'sender_nick_name' varchar(255),
         'sender_face_url' varchar(255),
+        'sender_face_background_color' varchar(255),
         'session_type' integer,
         'msg_from' integer,
         'content_type' integer,

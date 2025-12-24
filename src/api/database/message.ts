@@ -736,7 +736,8 @@ export async function updateMsgSenderFaceURLAndSenderNickname(
   conversationID: string,
   sendID: string,
   faceURL: string,
-  nickname: string
+  nickname: string,
+  faceBackgroundColor?: string
 ): Promise<string> {
   try {
     const db = await getInstance();
@@ -746,7 +747,8 @@ export async function updateMsgSenderFaceURLAndSenderNickname(
       conversationID,
       sendID,
       faceURL,
-      nickname
+      nickname,
+      faceBackgroundColor
     );
 
     return formatResponse('');

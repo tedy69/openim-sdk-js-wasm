@@ -186,6 +186,7 @@ export type ConversationItem = {
   groupID: string;
   showName: string;
   faceURL: string;
+  faceBackgroundColor?: string;
   recvMsgOpt: MessageReceiveOptType;
   unreadCount: number;
   groupAtType: GroupAtType;
@@ -215,6 +216,7 @@ export type MessageItem = {
   senderPlatformID: Platform;
   senderNickname: string;
   senderFaceUrl: string;
+  senderFaceBackgroundColor: string;
   groupID: string;
   content: string;
   seq: number;

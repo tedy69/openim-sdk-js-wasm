@@ -13,6 +13,7 @@ export function localConversations(db: Database): QueryExecResult[] {
             'group_id' char(128),
             'show_name' varchar(255),
             'face_url' varchar(255),
+            'face_background_color' varchar(255),
             'recv_msg_opt' integer,
             'unread_count' integer,
             'group_at_type' integer,
