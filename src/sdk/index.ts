@@ -1,7 +1,7 @@
 import { initDatabaseAPI, workerPromise } from '@/api';
 import Emitter from '@/utils/emitter';
 import { v4 as uuidv4 } from 'uuid';
-import { getGO, initializeWasm, getGoExitPromise } from './initialize';
+import { getGO, initializeWasm, getGoExitPromise, reset } from './initialize';
 
 import {
   AccessFriendApplicationParams,
@@ -26,6 +26,8 @@ import {
   GetHistoryMsgParams,
   GetOneConversationParams,
   ImageMsgParamsByURL,
+  InitConfig,
+  LoginConfig,
   InitAndLoginConfig,
   InsertGroupMsgParams,
   InsertSingleMsgParams,
@@ -115,12 +117,17 @@ class SDK extends Emitter {
   private goExisted = false;
   private tryParse = true;
   private isLogStandardOutput = true;
+  private isInitialized = false;
 
   constructor(url = '/openIM.wasm', debug = true) {
     super();
 
+    // Reset any previous state before initializing
+    reset();
+
     initDatabaseAPI(debug);
     this.isLogStandardOutput = debug;
+    this.isInitialized = false; // Reset initialization flag
     this.wasmInitializedPromise = initializeWasm(url);
     this.goExitPromise = getGoExitPromise();
 
@@ -134,6 +141,7 @@ class SDK extends Emitter {
         })
         .finally(() => {
           this.goExisted = true;
+          this.isInitialized = false; // Reset when WASM exits
         });
     }
   }
@@ -212,13 +220,22 @@ class SDK extends Emitter {
       }
     });
   }
-  login = async (params: InitAndLoginConfig, operationID = uuidv4()) => {
+
+  init = async (params: InitConfig, operationID = uuidv4()) => {
     this._logWrap(
-      `SDK => (invoked by js) run login with args ${JSON.stringify({
+      `SDK => (invoked by js) run init with args ${JSON.stringify({
         params,
         operationID,
       })}`
     );
+
+    // Prevent multiple initialization calls
+    if (this.isInitialized) {
+      this._logWrap(
+        'SDK => init already called, skipping duplicate initialization'
+      );
+      return Promise.resolve();
+    }
 
     await workerPromise;
     await this.wasmInitializedPromise;
@@ -258,7 +275,28 @@ class SDK extends Emitter {
       isExternalExtensions: params.isExternalExtensions || false,
     };
     this.tryParse = params.tryParse ?? true;
-    window.initSDK(operationID, JSON.stringify(config));
+
+    const result = window.initSDK(operationID, JSON.stringify(config));
+    this.isInitialized = true;
+    return result;
+  };
+
+  login = async (
+    params: LoginConfig | InitAndLoginConfig,
+    operationID = uuidv4()
+  ) => {
+    this._logWrap(
+      `SDK => (invoked by js) run login with args ${JSON.stringify({
+        params,
+        operationID,
+      })}`
+    );
+
+    // If initialization config is provided, run init first
+    if ('platformID' in params) {
+      await this.init(params, operationID);
+    }
+
     return await window.login(operationID, params.userID, params.token);
   };
   logout = <T>(operationID = uuidv4()) => {

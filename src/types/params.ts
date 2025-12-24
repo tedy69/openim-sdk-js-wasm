@@ -28,6 +28,21 @@ export type WasmPathConfig = {
   debug?: boolean;
 };
 
+export type InitConfig = {
+  platformID: number;
+  apiAddr: string;
+  wsAddr: string;
+  logLevel?: LogLevel;
+  isLogStandardOutput?: boolean;
+  isExternalExtensions?: boolean;
+  tryParse?: boolean;
+};
+
+export type LoginConfig = {
+  userID: string;
+  token: string;
+};
+
 export type InitAndLoginConfig = {
   userID: string;
   token: string;

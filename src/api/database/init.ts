@@ -28,6 +28,7 @@ let sqlWasmPath: string;
 
 export function setSqlWasmPath(wasmPath: string) {
   sqlWasmPath = wasmPath;
+  return { success: true, path: wasmPath };
 }
 
 export async function init(userId: string, dir: string): Promise<string> {

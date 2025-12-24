@@ -6,6 +6,21 @@ let goExitPromise: Promise<void> | undefined;
 
 const CACHE_KEY = 'openim-wasm-cache';
 
+if (typeof window !== 'undefined') {
+  const cleanup = () => {
+    reset();
+  };
+
+  window.addEventListener('beforeunload', cleanup);
+  window.addEventListener('unload', cleanup);
+
+  if ('__TAURI__' in window) {
+    window.addEventListener('tauri://close-requested', cleanup);
+    window.addEventListener('tauri://destroyed', cleanup);
+    window.addEventListener('tauri://window-close-requested', cleanup);
+  }
+}
+
 export async function initializeWasm(url: string): Promise<Go | null> {
   if (initialized) {
     return null;
@@ -40,6 +55,13 @@ export async function initializeWasm(url: string): Promise<Go | null> {
 
 export function reset() {
   initialized = false;
+  if (go) {
+    go = undefined as any;
+  }
+
+  if (goExitPromise) {
+    goExitPromise = undefined;
+  }
 }
 
 export function getGO() {
