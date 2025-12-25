@@ -14,7 +14,7 @@ export function tempCacheLocalChatLogs(db: Database): QueryExecResult[] {
         'sender_platform_id' integer,
         'sender_nick_name' varchar(255),
         'sender_face_url' varchar(255),
-        'sender_face_background_color' varchar(255),
+        'sender_facebackground_color' varchar(255),
         'session_type' integer,
         'msg_from' integer,
         'content_type' integer,
@@ -26,6 +26,8 @@ export function tempCacheLocalChatLogs(db: Database): QueryExecResult[] {
         'create_time' integer,
         'attached_info' varchar(1024),
         'ex' varchar(1024),
+        'envelope_claimed_info' varchar(1024),
+        'transfer_claimed_info' varchar(1024),
         PRIMARY KEY ('client_msg_id')
       );
       `

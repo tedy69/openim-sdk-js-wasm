@@ -21,7 +21,7 @@ export function localChatLogsConversationID(
         'sender_platform_id' smallint,
         'sender_nick_name' varchar(255),
         'sender_face_url' varchar(255),
-        'sender_face_background_color' varchar(255),
+        'sender_facebackground_color' varchar(255),
         'session_type' smallint,
         'msg_from' smallint,
         'content_type' smallint,
@@ -34,6 +34,8 @@ export function localChatLogsConversationID(
         'attached_info' varchar(1024),
         'ex' varchar(1024),
         'local_ex' varchar(1024),
+        'envelope_claimed_info' varchar(1024),
+        'transfer_claimed_info' varchar(1024),
         'is_react' tinyint(1),
         'is_external_extensions' tinyint(1),
         'msg_first_modify_time' int,
@@ -430,7 +432,11 @@ export function updateMsgSenderFaceURLAndSenderNickname(
   faceBackgroundColor?: string
 ): QueryExecResult[] {
   _initLocalChatLogsTable(db, conversationID);
-  const updateFields = `sender_face_url = '${faceURL}', sender_nick_name = '${nickname}'${faceBackgroundColor ? `, sender_face_background_color = '${faceBackgroundColor}'` : ''}`;
+  const updateFields = `sender_face_url = '${faceURL}', sender_nick_name = '${nickname}'${
+    faceBackgroundColor
+      ? `, sender_facebackground_color = '${faceBackgroundColor}'`
+      : ''
+  }`;
   return db.exec(
     `
       UPDATE 'chat_logs_${conversationID}' SET ${updateFields} WHERE send_id = '${sendID}';
