@@ -134,6 +134,31 @@ function alterAddSenderFaceBackgroundColor(db: Database) {
     } catch (e) {
       // Column might already exist
     }
+
+    // Add face_background_color to local_friends table
+    try {
+      db.exec(
+        'ALTER TABLE local_friends ADD COLUMN face_background_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist
+    }
+
+    // Add from_facebackground_color and to_facebackground_color to local_friend_requests table
+    try {
+      db.exec(
+        'ALTER TABLE local_friend_requests ADD COLUMN from_facebackground_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist
+    }
+    try {
+      db.exec(
+        'ALTER TABLE local_friend_requests ADD COLUMN to_facebackground_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist
+    }
   } catch (error) {
     // alter table error
   }

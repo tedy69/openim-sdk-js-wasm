@@ -88,6 +88,7 @@ export type FriendApplicationItem = {
   createTime: number;
   ex: string;
   fromFaceURL: string;
+  fromFaceBackgroundColor: string;
   fromNickname: string;
   fromUserID: string;
   handleMsg: string;
@@ -96,6 +97,7 @@ export type FriendApplicationItem = {
   handlerUserID: string;
   reqMsg: string;
   toFaceURL: string;
+  toFaceBackgroundColor: string;
   toNickname: string;
   toUserID: string;
 };
@@ -121,6 +123,7 @@ export type FriendUserItem = {
   createTime: number;
   ex: string;
   faceURL: string;
+  faceBackgroundColor: string;
   userID: string;
   nickname: string;
   operatorUserID: string;
