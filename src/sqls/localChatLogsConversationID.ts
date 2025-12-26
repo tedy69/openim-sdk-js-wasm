@@ -82,6 +82,19 @@ export function getMessageList(
   startClientMsgID: string,
   isReverse: boolean
 ): QueryExecResult[] {
+  // Handle initial load when startTime is 0 - just get latest messages
+  if (startTime === 0) {
+    return db.exec(
+      `
+      SELECT * FROM 'chat_logs_${conversationID}' 
+      ORDER BY send_time ${!isReverse ? 'DESC' : 'ASC'}, seq ${
+        !isReverse ? 'DESC' : 'ASC'
+      }
+      LIMIT ${count}
+      `
+    );
+  }
+
   return db.exec(
     // `
     // SELECT * FROM 'chat_logs_${conversationID}' WHERE send_time ${
@@ -159,9 +172,11 @@ export function getMessageListNoTime(
   _initLocalChatLogsTable(db, conversationID);
   return db.exec(
     `
-    SELECT * FROM 'chat_logs_${conversationID}' ORDER BY send_time ${
+    SELECT * FROM 'chat_logs_${conversationID}' 
+    ORDER BY send_time ${!isReverse ? 'DESC' : 'ASC'}, seq ${
       !isReverse ? 'DESC' : 'ASC'
-    } LIMIT ${count}
+    }
+    LIMIT ${count}
     `
   );
 }
