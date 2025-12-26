@@ -116,6 +116,15 @@ function alterAddSenderFaceBackgroundColor(db: Database) {
     } catch (e) {
       // Column might already exist
     }
+
+    // Add face_background_color to local_groups table
+    try {
+      db.exec(
+        'ALTER TABLE local_groups ADD COLUMN face_background_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist
+    }
   } catch (error) {
     // alter table error
   }
