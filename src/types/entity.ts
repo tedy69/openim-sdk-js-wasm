@@ -65,6 +65,7 @@ export type GroupApplicationItem = {
   creatorUserID: string;
   ex: string;
   groupFaceURL: string;
+  groupFaceBackgroundColor: string;
   groupID: string;
   groupName: string;
   groupType: GroupType;
@@ -82,6 +83,7 @@ export type GroupApplicationItem = {
   joinSource: GroupJoinSource;
   status: GroupStatus;
   userFaceURL: string;
+  faceBackgroundColor: string;
   userID: string;
 };
 export type FriendApplicationItem = {
