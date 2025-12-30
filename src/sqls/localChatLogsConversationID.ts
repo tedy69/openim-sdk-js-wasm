@@ -21,6 +21,7 @@ export function localChatLogsConversationID(
         'sender_platform_id' smallint,
         'sender_nick_name' varchar(255),
         'sender_face_url' varchar(255),
+        'sender_facebackground_color' varchar(255),
         'session_type' smallint,
         'msg_from' smallint,
         'content_type' smallint,
@@ -33,6 +34,8 @@ export function localChatLogsConversationID(
         'attached_info' varchar(1024),
         'ex' varchar(1024),
         'local_ex' varchar(1024),
+        'envelope_claimed_info' varchar(1024),
+        'transfer_claimed_info' varchar(1024),
         'is_react' tinyint(1),
         'is_external_extensions' tinyint(1),
         'msg_first_modify_time' int,
@@ -79,6 +82,19 @@ export function getMessageList(
   startClientMsgID: string,
   isReverse: boolean
 ): QueryExecResult[] {
+  // Handle initial load when startTime is 0 - just get latest messages
+  if (startTime === 0) {
+    return db.exec(
+      `
+      SELECT * FROM 'chat_logs_${conversationID}' 
+      ORDER BY send_time ${!isReverse ? 'DESC' : 'ASC'}, seq ${
+        !isReverse ? 'DESC' : 'ASC'
+      }
+      LIMIT ${count}
+      `
+    );
+  }
+
   return db.exec(
     // `
     // SELECT * FROM 'chat_logs_${conversationID}' WHERE send_time ${
@@ -156,9 +172,11 @@ export function getMessageListNoTime(
   _initLocalChatLogsTable(db, conversationID);
   return db.exec(
     `
-    SELECT * FROM 'chat_logs_${conversationID}' ORDER BY send_time ${
+    SELECT * FROM 'chat_logs_${conversationID}' 
+    ORDER BY send_time ${!isReverse ? 'DESC' : 'ASC'}, seq ${
       !isReverse ? 'DESC' : 'ASC'
-    } LIMIT ${count}
+    }
+    LIMIT ${count}
     `
   );
 }
@@ -425,12 +443,18 @@ export function updateMsgSenderFaceURLAndSenderNickname(
   conversationID: string,
   sendID: string,
   faceURL: string,
-  nickname: string
+  nickname: string,
+  faceBackgroundColor?: string
 ): QueryExecResult[] {
   _initLocalChatLogsTable(db, conversationID);
+  const updateFields = `sender_face_url = '${faceURL}', sender_nick_name = '${nickname}'${
+    faceBackgroundColor
+      ? `, sender_facebackground_color = '${faceBackgroundColor}'`
+      : ''
+  }`;
   return db.exec(
     `
-      UPDATE 'chat_logs_${conversationID}' SET sender_face_url = '${faceURL}', sender_nick_name = '${nickname}' WHERE send_id = '${sendID}';
+      UPDATE 'chat_logs_${conversationID}' SET ${updateFields} WHERE send_id = '${sendID}';
       `
   );
 }

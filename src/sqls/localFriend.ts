@@ -16,6 +16,7 @@ export function localFriends(db: Database): QueryExecResult[] {
           'operator_user_id' varchar(64),
           'name'             varchar(255),
           'face_url'         varchar(255),
+          'face_background_color' varchar(255),
           'ex'               varchar(1024),
           'attached_info'    varchar(1024),
           'is_pinned'        numeric,

@@ -65,6 +65,7 @@ export type GroupApplicationItem = {
   creatorUserID: string;
   ex: string;
   groupFaceURL: string;
+  groupFaceBackgroundColor: string;
   groupID: string;
   groupName: string;
   groupType: GroupType;
@@ -82,12 +83,14 @@ export type GroupApplicationItem = {
   joinSource: GroupJoinSource;
   status: GroupStatus;
   userFaceURL: string;
+  faceBackgroundColor: string;
   userID: string;
 };
 export type FriendApplicationItem = {
   createTime: number;
   ex: string;
   fromFaceURL: string;
+  fromFaceBackgroundColor: string;
   fromNickname: string;
   fromUserID: string;
   handleMsg: string;
@@ -96,6 +99,7 @@ export type FriendApplicationItem = {
   handlerUserID: string;
   reqMsg: string;
   toFaceURL: string;
+  toFaceBackgroundColor: string;
   toNickname: string;
   toUserID: string;
 };
@@ -121,6 +125,7 @@ export type FriendUserItem = {
   createTime: number;
   ex: string;
   faceURL: string;
+  faceBackgroundColor: string;
   userID: string;
   nickname: string;
   operatorUserID: string;
@@ -186,6 +191,7 @@ export type ConversationItem = {
   groupID: string;
   showName: string;
   faceURL: string;
+  faceBackgroundColor?: string;
   recvMsgOpt: MessageReceiveOptType;
   unreadCount: number;
   groupAtType: GroupAtType;
@@ -215,6 +221,7 @@ export type MessageItem = {
   senderPlatformID: Platform;
   senderNickname: string;
   senderFaceUrl: string;
+  senderFaceBackgroundColor: string;
   groupID: string;
   content: string;
   seq: number;

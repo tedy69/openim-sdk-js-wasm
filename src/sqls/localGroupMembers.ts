@@ -11,6 +11,7 @@ export function localGroupMembers(db: Database): QueryExecResult[] {
         'user_id' varchar(64),
         'nickname' varchar(255),
         'user_group_face_url' varchar(255),
+        'face_background_color' varchar(255),
         'role_level' integer,
         'join_time' integer,
         'join_source' integer,
