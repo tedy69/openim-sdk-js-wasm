@@ -41,19 +41,19 @@ function initWorker() {
   if (isViteEnvironment) {
     workerUrl = workerUrl.href.replace(
       '.vite/deps',
-      '@inter-digital/wasm-client-sdk/lib'
+      '@imam-inter/wasm-client-sdk/lib'
     ) as unknown as URL;
   }
   if (isNuxtEnvironment) {
     workerUrl = workerUrl.href.replace(
       '.cache/vite/client/deps',
-      '@inter-digital/wasm-client-sdk/lib'
+      '@imam-inter/wasm-client-sdk/lib'
     ) as unknown as URL;
   }
   if (isQuasarEnvironment) {
     workerUrl = workerUrl.href.replace(
       /\.q-cache\/dev-spa\/[^/]+\/deps/,
-      '@inter-digital/wasm-client-sdk/lib'
+      '@imam-inter/wasm-client-sdk/lib'
     ) as unknown as URL;
   }
   worker = new Worker(workerUrl, {
