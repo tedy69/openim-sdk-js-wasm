@@ -483,7 +483,7 @@ class SDK extends Emitter {
     return this._invoker<MessageItem>(
       'createQuoteMessage',
       window.createQuoteMessage,
-      [operationID, params.text, params.message],
+      [operationID, params.text, JSON.stringify(params.message)],
       data => {
         // compitable with old version sdk
         return data[0];
