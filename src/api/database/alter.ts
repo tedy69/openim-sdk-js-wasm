@@ -38,9 +38,10 @@ function alter381(db: Database) {
         ALTER TABLE local_app_sdk_version ADD COLUMN installed numeric;
         `
     );
+  } catch (error) {
+    // alter table error
   }
 }
-
 
 function alterAddSenderFaceBackgroundColor(db: Database) {
   try {
@@ -144,17 +145,26 @@ function alterAddSenderFaceBackgroundColor(db: Database) {
       // Column might already exist
     }
 
-    // Add from_facebackground_color and to_facebackground_color to local_friend_requests table
+    // Add face_background_color to local_users table
     try {
       db.exec(
-        'ALTER TABLE local_friend_requests ADD COLUMN from_facebackground_color varchar(255);'
+        'ALTER TABLE local_users ADD COLUMN face_background_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist
+    }
+
+    // Add from_face_background_color and to_face_background_color to local_friend_requests table
+    try {
+      db.exec(
+        'ALTER TABLE local_friend_requests ADD COLUMN from_face_background_color varchar(255);'
       );
     } catch (e) {
       // Column might already exist
     }
     try {
       db.exec(
-        'ALTER TABLE local_friend_requests ADD COLUMN to_facebackground_color varchar(255);'
+        'ALTER TABLE local_friend_requests ADD COLUMN to_face_background_color varchar(255);'
       );
     } catch (e) {
       // Column might already exist

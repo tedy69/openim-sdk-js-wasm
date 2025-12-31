@@ -10,6 +10,7 @@ export function localUsers(db: Database): QueryExecResult[] {
             'user_id' varchar(64),
             'name' varchar(255),
             'face_url' varchar(255),
+            'face_background_color' varchar(255),
             'create_time' integer,
             'app_manger_level' integer,
             'ex' varchar(1024),
