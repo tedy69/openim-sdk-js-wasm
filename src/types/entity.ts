@@ -83,7 +83,6 @@ export type GroupApplicationItem = {
   joinSource: GroupJoinSource;
   status: GroupStatus;
   userFaceURL: string;
-  faceBackgroundColor: string;
   userID: string;
 };
 export type FriendApplicationItem = {
