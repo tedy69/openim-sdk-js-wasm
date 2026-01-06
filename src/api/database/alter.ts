@@ -178,6 +178,15 @@ function alterAddSenderFaceBackgroundColor(db: Database) {
     } catch (e) {
       // Column might already exist (for user group_face_background_color)
     }
+
+    // Add group_face_background_color columns to local_admin_group_requests table
+    try {
+      db.exec(
+        'ALTER TABLE local_admin_group_requests ADD COLUMN group_face_background_color varchar(255);'
+      );
+    } catch (e) {
+      // Column might already exist (for user group_face_background_color)
+    }
   } catch (error) {
     // alter table error
   }

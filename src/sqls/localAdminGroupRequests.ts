@@ -12,6 +12,7 @@ export function localAdminGroupRequests(db: Database): QueryExecResult[] {
         "notification" varchar(255),
         "introduction" varchar(255),
         "face_url" varchar(255),
+        "group_face_background_color" varchar(255),
         "create_time" integer,
         "status" integer,
         "creator_user_id" varchar(64),
