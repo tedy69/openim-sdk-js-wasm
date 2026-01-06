@@ -22,6 +22,7 @@ export function localGroupRequests(db: Database): QueryExecResult[] {
         "user_id" varchar(64),
         "nickname" varchar(255),
         "user_face_url" varchar(255),
+        "face_background_color" varchar(255),
         "gender" integer,
         "handle_result" integer,
         "req_msg" varchar(255),

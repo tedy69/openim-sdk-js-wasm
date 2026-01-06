@@ -60,6 +60,21 @@ export function convertToSnakeCaseObject(
 
   Object.keys(obj).forEach(k => {
     let value = obj[k];
+    // Normalize JSON fields: convert empty strings to null for fields that should be JSON
+    // This prevents Go unmarshaling errors when reading empty strings as JSON
+    const jsonFields = [
+      'attached_info',
+      'attachedInfo',
+      'ex',
+      'local_ex',
+      'localEx',
+    ];
+    const snakeKey = convertCamelCaseToSnakeCase(k);
+    if (jsonFields.includes(k) || jsonFields.includes(snakeKey)) {
+      if (value === '' || value === undefined) {
+        value = null;
+      }
+    }
     if (escape && isString(value)) {
       value = escapeString(value as string).slice(1, -1);
     }

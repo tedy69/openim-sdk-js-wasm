@@ -19,6 +19,7 @@ import {
   searchMessageByContentType,
   searchMessageByContentTypeAndKeyword,
   updateMsgSenderFaceURLAndSenderNickname,
+  updateMsgSenderFaceBackgroundColor,
   insertSendingMessage,
   deleteSendingMessage,
   getAllSendingMessages,
@@ -55,6 +56,7 @@ import {
   getLoginUser,
   insertLoginUser,
   updateLoginUser,
+  processUserCommandGetAll,
   getStrangerInfo,
   setStrangerInfo,
 
@@ -73,6 +75,7 @@ import {
   // black
   getBlackList,
   getBlackListUserID,
+  getBlackListByOtherDB,
   getBlackInfoByBlockUserID,
   getBlackInfoList,
   insertBlack,
@@ -249,6 +252,10 @@ rpc.registerMethod(
   'updateMsgSenderFaceURLAndSenderNickname',
   updateMsgSenderFaceURLAndSenderNickname
 );
+rpc.registerMethod(
+  'updateMsgSenderFaceBackgroundColor',
+  updateMsgSenderFaceBackgroundColor
+);
 rpc.registerMethod('getAlreadyExistSeqList', getAlreadyExistSeqList);
 rpc.registerMethod('getLatestValidServerMessage', getLatestValidServerMessage);
 rpc.registerMethod('getMessageBySeq', getMessageBySeq);
@@ -337,6 +344,7 @@ rpc.registerMethod('searchConversations', searchConversations);
 rpc.registerMethod('getLoginUser', getLoginUser);
 rpc.registerMethod('insertLoginUser', insertLoginUser);
 rpc.registerMethod('updateLoginUser', updateLoginUser);
+rpc.registerMethod('processUserCommandGetAll', processUserCommandGetAll);
 rpc.registerMethod('getStrangerInfo', getStrangerInfo);
 rpc.registerMethod('setStrangerInfo', setStrangerInfo);
 
@@ -366,6 +374,7 @@ rpc.registerMethod(
 // black
 rpc.registerMethod('getBlackList', getBlackList);
 rpc.registerMethod('getBlackListUserID', getBlackListUserID);
+rpc.registerMethod('getBlackListByOtherDB', getBlackListByOtherDB);
 rpc.registerMethod('getBlackInfoByBlockUserID', getBlackInfoByBlockUserID);
 rpc.registerMethod('getBlackInfoList', getBlackInfoList);
 rpc.registerMethod('insertBlack', insertBlack);

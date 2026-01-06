@@ -41,6 +41,19 @@ export function getBlackListUserID(db: Database): QueryExecResult[] {
   );
 }
 
+export function getBlackListByOther(
+  db: Database,
+  loginUserID: string
+): QueryExecResult[] {
+  return db.exec(
+    `
+    SELECT *
+    FROM local_blacks
+    WHERE block_user_id = "${loginUserID}"
+      `
+  );
+}
+
 export function getBlackInfoByBlockUserID(
   db: Database,
   blockUserID: string,

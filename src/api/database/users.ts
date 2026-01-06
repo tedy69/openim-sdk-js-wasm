@@ -87,3 +87,16 @@ export async function updateLoginUser(userStr: string): Promise<string> {
     );
   }
 }
+
+export function processUserCommandGetAll(): Promise<string> {
+  try {
+    // Stub function - returns empty array as user commands are not stored in database
+    return Promise.resolve(formatResponse('[]'));
+  } catch (e) {
+    console.error(e);
+
+    return Promise.resolve(
+      formatResponse(undefined, DatabaseErrorCode.ErrorInit, JSON.stringify(e))
+    );
+  }
+}

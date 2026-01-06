@@ -459,6 +459,20 @@ export function updateMsgSenderFaceURLAndSenderNickname(
   );
 }
 
+export function updateMsgSenderFaceBackgroundColor(
+  db: Database,
+  conversationID: string,
+  sendID: string,
+  faceBackgroundColor: string
+): QueryExecResult[] {
+  _initLocalChatLogsTable(db, conversationID);
+  return db.exec(
+    `
+      UPDATE 'chat_logs_${conversationID}' SET sender_facebackground_color = '${faceBackgroundColor}' WHERE send_id = '${sendID}';
+      `
+  );
+}
+
 // export function getMsgSeqByClientMsgID(
 //     db: Database,
 // )

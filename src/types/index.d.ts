@@ -46,6 +46,7 @@ declare global {
     updateMsgSenderNickname: DatabaseApi;
     updateMsgSenderFaceURL: DatabaseApi;
     updateMsgSenderFaceURLAndSenderNickname: DatabaseApi;
+    updateMsgSenderFaceBackgroundColor: DatabaseApi;
     getMsgSeqByClientMsgID: DatabaseApi;
     getMsgSeqListByGroupID: DatabaseApi;
     getMsgSeqListByPeerUserID: DatabaseApi;
@@ -112,6 +113,7 @@ declare global {
     getLoginUser: DatabaseApi;
     insertLoginUser: DatabaseApi;
     updateLoginUser: DatabaseApi;
+    processUserCommandGetAll: DatabaseApi;
     getStrangerInfo: DatabaseApi;
     setStrangerInfo: DatabaseApi;
     getJoinedSuperGroupList: DatabaseApi;
@@ -157,6 +159,7 @@ declare global {
     // black
     getBlackListDB: DatabaseApi;
     getBlackListUserID: DatabaseApi;
+    getBlackListByOtherDB: DatabaseApi;
     getBlackInfoByBlockUserID: DatabaseApi;
     getBlackInfoList: DatabaseApi;
     insertBlack: DatabaseApi;

@@ -210,6 +210,9 @@ export function initDatabaseAPI(isLogStandardOutput = true): void {
   window.updateMsgSenderFaceURLAndSenderNickname = registeMethodOnWindow(
     'updateMsgSenderFaceURLAndSenderNickname'
   );
+  window.updateMsgSenderFaceBackgroundColor = registeMethodOnWindow(
+    'updateMsgSenderFaceBackgroundColor'
+  );
   window.getMsgSeqByClientMsgID = registeMethodOnWindow(
     'getMsgSeqByClientMsgID'
   );
@@ -362,6 +365,9 @@ export function initDatabaseAPI(isLogStandardOutput = true): void {
   window.getLoginUser = registeMethodOnWindow('getLoginUser');
   window.insertLoginUser = registeMethodOnWindow('insertLoginUser');
   window.updateLoginUser = registeMethodOnWindow('updateLoginUser');
+  window.processUserCommandGetAll = registeMethodOnWindow(
+    'processUserCommandGetAll'
+  );
   window.getStrangerInfo = registeMethodOnWindow('getStrangerInfo');
   window.setStrangerInfo = registeMethodOnWindow('setStrangerInfo');
 
@@ -486,6 +492,7 @@ export function initDatabaseAPI(isLogStandardOutput = true): void {
   // black
   window.getBlackListDB = registeMethodOnWindow('getBlackList');
   window.getBlackListUserID = registeMethodOnWindow('getBlackListUserID');
+  window.getBlackListByOtherDB = registeMethodOnWindow('getBlackListByOtherDB');
   window.getBlackInfoByBlockUserID = registeMethodOnWindow(
     'getBlackInfoByBlockUserID'
   );

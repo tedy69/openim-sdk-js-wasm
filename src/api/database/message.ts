@@ -27,6 +27,7 @@ import {
   searchMessageByContentType as databaseSearchMessageByContentType,
   searchMessageByContentTypeAndKeyword as databaseSearchMessageByContentTypeAndKeyword,
   updateMsgSenderFaceURLAndSenderNickname as databaseUpdateMsgSenderFaceURLAndSenderNickname,
+  updateMsgSenderFaceBackgroundColor as databaseUpdateMsgSenderFaceBackgroundColor,
   deleteConversationAllMessages as databaseDeleteConversationAllMessages,
   markDeleteConversationAllMessages as databaseMarkDeleteConversationAllMessages,
   getUnreadMessage as databaseGetUnreadMessage,
@@ -748,6 +749,33 @@ export async function updateMsgSenderFaceURLAndSenderNickname(
       sendID,
       faceURL,
       nickname,
+      faceBackgroundColor
+    );
+
+    return formatResponse('');
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
+export async function updateMsgSenderFaceBackgroundColor(
+  conversationID: string,
+  sendID: string,
+  faceBackgroundColor: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+
+    databaseUpdateMsgSenderFaceBackgroundColor(
+      db,
+      conversationID,
+      sendID,
       faceBackgroundColor
     );
 

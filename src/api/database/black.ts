@@ -2,6 +2,7 @@ import { DatabaseErrorCode } from '@/constant';
 import {
   getBlackList as databaseGetBlackList,
   getBlackListUserID as databaseGetBlackListUserID,
+  getBlackListByOther as databaseGetBlackListByOther,
   getBlackInfoByBlockUserID as databaseGetBlackInfoByBlockUserID,
   getBlackInfoList as databaseGetBlackInfoList,
   insertBlack as databaseInsertBlack,
@@ -46,6 +47,30 @@ export async function getBlackListUserID(): Promise<string> {
     const execResult = databaseGetBlackListUserID(db);
 
     return formatResponse(converSqlExecResult(execResult[0], 'CamelCase'));
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
+export async function getBlackListByOtherDB(
+  loginUserID: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+
+    const execResult = databaseGetBlackListByOther(db, loginUserID);
+
+    return formatResponse(
+      converSqlExecResult(execResult[0], 'CamelCase', [], {
+        block_user_id: 'userID',
+      })
+    );
   } catch (e) {
     console.error(e);
 
