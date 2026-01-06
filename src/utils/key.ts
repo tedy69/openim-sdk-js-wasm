@@ -73,6 +73,7 @@ const InternalConstraint = [
   ['entity_id', 'entityID'],
   ['version_id', 'versionID'],
   ['display_is_read', 'displayIsRead'],
+  ['group_face_background_color', 'groupFaceBackgroundColor'],
 ];
 
 function _getInternalCamelCaseBySnakeCase(key: string) {

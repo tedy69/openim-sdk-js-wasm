@@ -27,6 +27,7 @@ export async function insertGroupRequest(
     const localGroupRequest = convertToSnakeCaseObject(
       convertObjectField(JSON.parse(localGroupRequestStr), {
         groupFaceURL: 'face_url',
+        groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
@@ -76,6 +77,7 @@ export async function updateGroupRequest(
     const localGroupRequest = convertToSnakeCaseObject(
       convertObjectField(JSON.parse(localGroupRequestStr), {
         groupFaceURL: 'face_url',
+        groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
@@ -104,6 +106,7 @@ export async function getSendGroupApplication(): Promise<string> {
     return formatResponse(
       converSqlExecResult(execResult[0], 'CamelCase', [], {
         face_url: 'groupFaceURL',
+        group_face_background_color: 'groupFaceBackgroundColor',
         user_face_url: 'userFaceURL',
         handle_msg: 'handledMsg',
         handle_time: 'handledTime',
@@ -129,6 +132,7 @@ export async function insertAdminGroupRequest(
     const localAminGroupRequest = convertToSnakeCaseObject(
       convertObjectField(JSON.parse(localAdminGroupRequestStr), {
         groupFaceURL: 'face_url',
+        groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
@@ -178,6 +182,7 @@ export async function updateAdminGroupRequest(
     const localGroupRequest = convertToSnakeCaseObject(
       convertObjectField(JSON.parse(localGroupRequestStr), {
         groupFaceURL: 'face_url',
+        groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
@@ -206,6 +211,7 @@ export async function getAdminGroupApplication(): Promise<string> {
     return formatResponse(
       converSqlExecResult(execResult[0], 'CamelCase', [], {
         face_url: 'groupFaceURL',
+        group_face_background_color: 'groupFaceBackgroundColor',
         user_face_url: 'userFaceURL',
         handle_msg: 'handledMsg',
         handle_time: 'handledTime',
