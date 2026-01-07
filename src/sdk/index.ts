@@ -273,6 +273,11 @@ class SDK extends Emitter {
         params.isLogStandardOutput ?? this.isLogStandardOutput,
       logFilePath: './',
       isExternalExtensions: params.isExternalExtensions || false,
+      // SDK Monitoring
+      enableListenerMonitoring: params.enableListenerMonitoring || false,
+      pushgatewayURL: params.pushgatewayURL || '',
+      metricsPushIntervalSec: params.metricsPushIntervalSec || 60,
+      slowCallbackThresholdMs: params.slowCallbackThresholdMs || 1000,
     };
     this.tryParse = params.tryParse ?? true;
 
