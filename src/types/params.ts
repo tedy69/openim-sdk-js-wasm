@@ -36,6 +36,11 @@ export type InitConfig = {
   isLogStandardOutput?: boolean;
   isExternalExtensions?: boolean;
   tryParse?: boolean;
+  // SDK Monitoring
+  enableListenerMonitoring?: boolean;
+  pushgatewayURL?: string;
+  metricsPushIntervalSec?: number;
+  slowCallbackThresholdMs?: number;
 };
 
 export type LoginConfig = {
@@ -53,6 +58,11 @@ export type InitAndLoginConfig = {
   isLogStandardOutput?: boolean;
   isExternalExtensions?: boolean;
   tryParse?: boolean;
+  // SDK Monitoring
+  enableListenerMonitoring?: boolean;
+  pushgatewayURL?: string;
+  metricsPushIntervalSec?: number;
+  slowCallbackThresholdMs?: number;
 };
 
 export type GetOneConversationParams = {

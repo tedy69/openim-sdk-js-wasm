@@ -40,6 +40,11 @@ export type IMConfig = {
   isLogStandardOutput: boolean;
   logFilePath: string;
   isExternalExtensions: boolean;
+  // SDK Monitoring
+  enableListenerMonitoring: boolean;
+  pushgatewayURL: string;
+  metricsPushIntervalSec: number;
+  slowCallbackThresholdMs: number;
 };
 export type MessageEntity = {
   type: string;
