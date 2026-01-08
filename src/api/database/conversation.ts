@@ -187,7 +187,7 @@ export async function getConversation(conversationID: string): Promise<string> {
 
     if (execResult.length === 0) {
       return formatResponse(
-        '',
+        null,
         DatabaseErrorCode.ErrorNoRecord,
         `no conversation with id ${conversationID}`
       );
@@ -363,7 +363,7 @@ export async function getConversationByUserID(userID: string): Promise<string> {
 
     if (execResult.length === 0) {
       return formatResponse(
-        '',
+        null,
         DatabaseErrorCode.ErrorNoRecord,
         `no conversation with userID ${userID}`
       );

@@ -68,6 +68,10 @@ export function convertToSnakeCaseObject(
       'ex',
       'local_ex',
       'localEx',
+      'envelope_claimed_info',
+      'envelopeClaimedInfo',
+      'transfer_claimed_info',
+      'transferClaimedInfo',
     ];
     const snakeKey = convertCamelCaseToSnakeCase(k);
     if (jsonFields.includes(k) || jsonFields.includes(snakeKey)) {
