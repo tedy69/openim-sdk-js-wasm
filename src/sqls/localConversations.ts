@@ -131,6 +131,17 @@ export function getConversation(
   );
 }
 
+export function getConversationByConversationIDLike(
+  db: Database,
+  conversationID: string
+): QueryExecResult[] {
+  return db.exec(
+    `
+        select * from local_conversations where conversation_id LIKE '%${conversationID}%' limit 1;
+    `
+  );
+}
+
 export function getMultipleConversation(
   db: Database,
   conversationIDList: string[]

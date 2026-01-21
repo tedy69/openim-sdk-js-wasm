@@ -294,6 +294,9 @@ export function initDatabaseAPI(isLogStandardOutput = true): void {
     'getHiddenConversationList'
   );
   window.getConversation = registeMethodOnWindow('getConversation');
+  window.getConversationByConversationIDLike = registeMethodOnWindow(
+    'getConversationByConversationIDLike'
+  );
   window.getMultipleConversationDB = registeMethodOnWindow(
     'getMultipleConversation'
   );

@@ -30,6 +30,7 @@ import {
   getAllConversationListToSync,
   getHiddenConversationList,
   getConversation,
+  getConversationByConversationIDLike,
   getMultipleConversation,
   updateColumnsConversation,
   decrConversationUnreadCount,
@@ -305,6 +306,10 @@ rpc.registerMethod(
 );
 rpc.registerMethod('getHiddenConversationList', getHiddenConversationList);
 rpc.registerMethod('getConversation', getConversation);
+rpc.registerMethod(
+  'getConversationByConversationIDLike',
+  getConversationByConversationIDLike
+);
 rpc.registerMethod('getMultipleConversation', getMultipleConversation);
 rpc.registerMethod('updateColumnsConversation', updateColumnsConversation);
 rpc.registerMethod('decrConversationUnreadCount', decrConversationUnreadCount);

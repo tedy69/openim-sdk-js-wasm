@@ -81,6 +81,7 @@ declare global {
     getAllConversationListToSync: DatabaseApi;
     getHiddenConversationList: DatabaseApi;
     getConversation: DatabaseApi;
+    getConversationByConversationIDLike: DatabaseApi;
     getMultipleConversationDB: DatabaseApi;
     updateColumnsConversation: DatabaseApi;
     updateConversation: DatabaseApi;
