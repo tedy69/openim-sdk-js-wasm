@@ -6,6 +6,7 @@ import {
   getAllConversationList as databaseGetAllConversationList,
   getAllConversationListToSync as databaseGetAllConversationListToSync,
   getConversation as databaseGetConversation,
+  getConversationByConversationIDLike as databaseGetConversationByConversationIDLike,
   getHiddenConversationList as databaseGetHiddenConversationList,
   getAllSingleConversationIDList as databaseGetAllSingleConversationIDList,
   findAllUnreadConversationConversationID as databaseFindAllUnreadConversationConversationID,
@@ -190,6 +191,44 @@ export async function getConversation(conversationID: string): Promise<string> {
         null,
         DatabaseErrorCode.ErrorNoRecord,
         `no conversation with id ${conversationID}`
+      );
+    }
+
+    return formatResponse(
+      converSqlExecResult(execResult[0], 'CamelCase', [
+        'isPinned',
+        'isPrivateChat',
+        'isNotInGroup',
+        'isMsgDestruct',
+      ])[0]
+    );
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
+export async function getConversationByConversationIDLike(
+  conversationID: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+
+    const execResult = databaseGetConversationByConversationIDLike(
+      db,
+      conversationID
+    );
+
+    if (execResult.length === 0) {
+      return formatResponse(
+        '',
+        DatabaseErrorCode.ErrorNoRecord,
+        `no conversation with id like ${conversationID}`
       );
     }
 
