@@ -88,6 +88,7 @@ export type GroupApplicationItem = {
   joinSource: GroupJoinSource;
   status: GroupStatus;
   userFaceURL: string;
+  userFaceBackgroundColor: string;
   faceBackgroundColor: string;
   userID: string;
 };
