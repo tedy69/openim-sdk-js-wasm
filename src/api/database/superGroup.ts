@@ -133,7 +133,10 @@ export async function updateSuperGroup(
     const execResult = databaseUpdateSuperGroup(db, groupID, group);
     const modifed = db.getRowsModified();
     if (modifed === 0) {
-      throw 'updateSuperGroup no record updated';
+      // SuperGroup doesn't exist yet in local DB, this is not an error
+      // It will be created when sync from server completes
+      console.warn('updateSuperGroup: no record found for groupID:', groupID);
+      return formatResponse('{}');
     }
 
     return formatResponse(execResult);

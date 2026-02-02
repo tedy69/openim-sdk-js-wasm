@@ -187,21 +187,88 @@ function alterAddSenderFaceBackgroundColor(db: Database) {
     } catch (e) {
       // Column might already exist (for user group_face_background_color)
     }
-    // Add face_background_color (user's face background color) to local_admin_group_requests table
+
+    // Rename face_background_color to user_face_background_color in local_admin_group_requests table
     try {
-      db.exec(
-        'ALTER TABLE local_admin_group_requests ADD COLUMN face_background_color varchar(255);'
+      // Check if old column exists
+      const result = db.exec(
+        "SELECT name FROM pragma_table_info('local_admin_group_requests') WHERE name='face_background_color';"
       );
+
+      if (result.length > 0 && result[0].values.length > 0) {
+        // Old column exists, need to migrate
+        // 1. Add new column
+        try {
+          db.exec(
+            'ALTER TABLE local_admin_group_requests ADD COLUMN user_face_background_color varchar(255);'
+          );
+        } catch (e) {
+          // Column might already exist
+        }
+
+        // 2. Copy data from old column to new column
+        db.exec(
+          'UPDATE local_admin_group_requests SET user_face_background_color = face_background_color WHERE face_background_color IS NOT NULL;'
+        );
+
+        // Note: SQLite doesn't support DROP COLUMN in older versions
+        // The old column will remain but won't be used
+      } else {
+        // Old column doesn't exist, just add the new one
+        try {
+          db.exec(
+            'ALTER TABLE local_admin_group_requests ADD COLUMN user_face_background_color varchar(255);'
+          );
+        } catch (e) {
+          // Column might already exist
+        }
+      }
     } catch (e) {
-      // Column might already exist
+      // Handle any errors during migration
+      console.warn('Error during face_background_color migration:', e);
     }
-    // Add face_background_color (user's face background color) to local_group_requests table
+
+    // Rename face_background_color to user_face_background_color in local_group_requests table
     try {
-      db.exec(
-        'ALTER TABLE local_group_requests ADD COLUMN face_background_color varchar(255);'
+      // Check if old column exists
+      const result = db.exec(
+        "SELECT name FROM pragma_table_info('local_group_requests') WHERE name='face_background_color';"
       );
+
+      if (result.length > 0 && result[0].values.length > 0) {
+        // Old column exists, need to migrate
+        // 1. Add new column
+        try {
+          db.exec(
+            'ALTER TABLE local_group_requests ADD COLUMN user_face_background_color varchar(255);'
+          );
+        } catch (e) {
+          // Column might already exist
+        }
+
+        // 2. Copy data from old column to new column
+        db.exec(
+          'UPDATE local_group_requests SET user_face_background_color = face_background_color WHERE face_background_color IS NOT NULL;'
+        );
+
+        // Note: SQLite doesn't support DROP COLUMN in older versions
+        // The old column will remain but won't be used
+      } else {
+        // Old column doesn't exist, just add the new one
+        try {
+          db.exec(
+            'ALTER TABLE local_group_requests ADD COLUMN user_face_background_color varchar(255);'
+          );
+        } catch (e) {
+          // Column might already exist
+        }
+      }
     } catch (e) {
-      // Column might already exist
+      // Handle any errors during migration
+      console.warn(
+        'Error during local_group_requests face_background_color migration:',
+        e
+      );
     }
   } catch (error) {
     // alter table error

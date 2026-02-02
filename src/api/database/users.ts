@@ -74,7 +74,10 @@ export async function updateLoginUser(userStr: string): Promise<string> {
     const execResult = databaseUpdateLoginUser(db, user);
     const modifed = db.getRowsModified();
     if (modifed === 0) {
-      throw 'updateLoginUser no record updated';
+      // User doesn't exist yet in local DB, this is not an error
+      // It will be created when sync from server completes
+      console.warn('updateLoginUser: no record found, user not yet synced');
+      return formatResponse('{}');
     }
     return formatResponse(execResult);
   } catch (e) {

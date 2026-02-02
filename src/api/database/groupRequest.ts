@@ -29,6 +29,7 @@ export async function insertGroupRequest(
         groupFaceURL: 'face_url',
         groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
+        userFaceBackgroundColor: 'user_face_background_color',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
       })
@@ -79,6 +80,7 @@ export async function updateGroupRequest(
         groupFaceURL: 'face_url',
         groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
+        userFaceBackgroundColor: 'user_face_background_color',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
       })
@@ -108,6 +110,7 @@ export async function getSendGroupApplication(): Promise<string> {
         face_url: 'groupFaceURL',
         group_face_background_color: 'groupFaceBackgroundColor',
         user_face_url: 'userFaceURL',
+        user_face_background_color: 'userFaceBackgroundColor',
         handle_msg: 'handledMsg',
         handle_time: 'handledTime',
       })
@@ -134,6 +137,7 @@ export async function insertAdminGroupRequest(
         groupFaceURL: 'face_url',
         groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
+        userFaceBackgroundColor: 'user_face_background_color',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
       })
@@ -184,6 +188,7 @@ export async function updateAdminGroupRequest(
         groupFaceURL: 'face_url',
         groupFaceBackgroundColor: 'group_face_background_color',
         userFaceURL: 'user_face_url',
+        userFaceBackgroundColor: 'user_face_background_color',
         handledMsg: 'handle_msg',
         handledTime: 'handle_time',
       })
@@ -212,6 +217,7 @@ export async function getAdminGroupApplication(): Promise<string> {
       converSqlExecResult(execResult[0], 'CamelCase', [], {
         face_url: 'groupFaceURL',
         group_face_background_color: 'groupFaceBackgroundColor',
+        user_face_background_color: 'userFaceBackgroundColor',
         user_face_url: 'userFaceURL',
         handle_msg: 'handledMsg',
         handle_time: 'handledTime',
