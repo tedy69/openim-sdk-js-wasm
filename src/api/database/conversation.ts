@@ -300,7 +300,13 @@ export async function updateColumnsConversation(
     const modifed = db.getRowsModified();
 
     if (modifed === 0) {
-      throw 'updateColumnsConversation no record updated';
+      // Conversation doesn't exist yet in local DB, this is not an error
+      // It will be created when sync from server completes
+      console.warn(
+        'updateColumnsConversation: no record found for conversationID:',
+        conversationID
+      );
+      return formatResponse('{}');
     }
 
     return formatResponse(execResult);
