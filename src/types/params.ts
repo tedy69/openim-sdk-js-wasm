@@ -32,6 +32,7 @@ export type InitConfig = {
   platformID: number;
   apiAddr: string;
   wsAddr: string;
+  chatAddr?: string;
   logLevel?: LogLevel;
   isLogStandardOutput?: boolean;
   isExternalExtensions?: boolean;
