@@ -77,6 +77,7 @@ import {
   ChangeInputStatesParams,
   GetInputstatesParams,
   FetchSurroundingParams,
+  TranslateMessageParams,
 } from '../types/params';
 
 import {
@@ -101,6 +102,7 @@ import {
   SearchMessageResult,
   SelfUserInfo,
   UserOnlineState,
+  TranslateResult,
   WSEvent,
   WsResponse,
 } from '../types/entity';
@@ -267,6 +269,7 @@ class SDK extends Emitter {
       platformID: params.platformID,
       apiAddr: params.apiAddr,
       wsAddr: params.wsAddr,
+      chatAddr: params.chatAddr || '',
       dataDir: './',
       logLevel: params.logLevel || 5,
       isLogStandardOutput:
@@ -577,6 +580,23 @@ class SDK extends Emitter {
       params.clientMsgID,
       params.localEx,
     ]);
+  };
+
+  translateMessage = (
+    params: TranslateMessageParams,
+    operationID = uuidv4()
+  ) => {
+    return this._invoker<TranslateResult>(
+      'translateMessage',
+      window.translateMessage,
+      [
+        operationID,
+        params.conversationID,
+        params.clientMsgID,
+        params.targetLang,
+        params.sourceLang ?? '',
+      ]
+    );
   };
 
   exportDB(operationID = uuidv4()) {
