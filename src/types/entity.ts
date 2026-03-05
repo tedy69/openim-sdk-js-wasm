@@ -35,6 +35,7 @@ export type IMConfig = {
   platformID: Platform;
   apiAddr: string;
   wsAddr: string;
+  chatAddr: string;
   dataDir: string;
   logLevel: LogLevel;
   isLogStandardOutput: boolean;
@@ -476,4 +477,11 @@ export type CallingRoomData = {
   participant?: ParticipantInfo[];
   invitation?: RtcInvite;
   roomID: string;
+};
+
+export type TranslateResult = {
+  clientMsgID: string;
+  translatedText: string;
+  detectedLang: string;
+  targetLang: string;
 };

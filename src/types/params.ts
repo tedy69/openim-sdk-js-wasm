@@ -33,6 +33,7 @@ export type InitAndLoginConfig = {
   platformID: number;
   apiAddr: string;
   wsAddr: string;
+  chatAddr?: string;
   logLevel?: LogLevel;
   isLogStandardOutput?: boolean;
   isExternalExtensions?: boolean;
@@ -86,6 +87,12 @@ export type SetMessageLocalExParams = {
   conversationID: string;
   clientMsgID: string;
   localEx: string;
+};
+export type TranslateMessageParams = {
+  conversationID: string;
+  clientMsgID: string;
+  targetLang: string;
+  sourceLang?: string;
 };
 export type ImageMsgParamsByURL = {
   sourcePicture: PicBaseInfo;

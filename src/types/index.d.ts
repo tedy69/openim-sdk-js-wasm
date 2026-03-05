@@ -811,6 +811,13 @@ declare global {
       conversationID: string,
       req: string
     ) => Promise<string>;
+    translateMessage: (
+      operationID: string,
+      conversationID: string,
+      clientMsgID: string,
+      targetLang: string,
+      sourceLang: string
+    ) => Promise<string>;
 
     signalingInvite: (...args) => Promise<string>;
     signalingInviteInGroup: (...args) => Promise<string>;
