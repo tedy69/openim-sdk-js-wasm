@@ -828,6 +828,7 @@ declare global {
       targetLang: string,
       sourceLang: string
     ) => Promise<string>;
+    setChatToken: (operationID: string, chatToken: string) => Promise<string>;
 
     signalingInvite: (...args) => Promise<string>;
     signalingInviteInGroup: (...args) => Promise<string>;

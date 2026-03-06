@@ -599,6 +599,13 @@ class SDK extends Emitter {
     );
   };
 
+  setChatToken = (chatToken: string, operationID = uuidv4()) => {
+    return this._invoker('setChatToken', window.setChatToken, [
+      operationID,
+      chatToken,
+    ]);
+  };
+
   exportDB(operationID = uuidv4()) {
     return this._invoker('exportDB', window.exportDB, [operationID]);
   }
